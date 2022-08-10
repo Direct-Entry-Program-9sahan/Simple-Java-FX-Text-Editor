@@ -19,6 +19,7 @@ import java.net.URL;
 import java.util.Arrays;
 
 public class TextEditorFormController {
+    private File savePath;
     private String readMsg;
     private File destDir;
 
@@ -41,6 +42,7 @@ public class TextEditorFormController {
             @Override
             public void handle(ActionEvent actionEvent) {
                 txtEditor.setHtmlText("");
+
             }
         });
         mnuClose.setOnAction(new EventHandler<ActionEvent>() {
@@ -82,17 +84,21 @@ public class TextEditorFormController {
     }
 
     public void mnuOpenOnAction(ActionEvent actionEvent) throws IOException {
-        selectFile();
+        selectFile();//value assigned to File srcFiles
+        readFile(srcFile.toString());//value assign to String readMsg
+        writeToEditor(savePath.toString());
     }
 
-    public void mnuSaveOnAction(ActionEvent actionEvent) {
-
+    public void mnuSaveOnAction(ActionEvent actionEvent) throws IOException {
+        selectDirectory();//assign path of the saving directory to File destDir
+        File file = new File(destDir.toString() + "/a.txt");
+        writeToFile(file.toString());
     }
 
     public void mnuPrintOnAction(ActionEvent actionEvent) {
     }
 
-    public void selectFile() throws IOException {
+    public void selectFile() throws IOException {  //open
         FileChooser fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
         fileChooser.setTitle("Select a file");
@@ -101,20 +107,19 @@ public class TextEditorFormController {
         srcFile = fileChooser.showOpenDialog(txtEditor.getScene().getWindow());
         if (srcFile != null) {
             System.out.println(srcFile.length());
-            readFile(srcFile.toString());
         } else {
             System.out.println(1);
         }
     }
 
-    public void selectDirectory(){
+    public void selectDirectory(){ //to save
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle("Select a destination folder to save");
         directoryChooser.setInitialDirectory(new File(System.getProperty("user.home")));
         destDir = directoryChooser.showDialog(txtEditor.getScene().getWindow());
     }
 
-    public void readFile(String path) throws IOException {
+    public void readFile(String path) throws IOException { //to write on html editor
         File file = new File(path);
         FileInputStream fis = new FileInputStream(file);
 
@@ -146,11 +151,20 @@ public class TextEditorFormController {
         fos.close();
     }
 
-    public void writeToFile(String filePath) throws IOException {
+    public void writeToFile(String filePath) throws IOException { //when save a file
         writeFile(filePath);
     }
 
-    public void writeToEditor(String path){
+    public void writeToEditor(String readedTxt) throws IOException { //when open file
+        String something = readedTxt;
+        byte[] bytes = something.getBytes();
 
+        FileOutputStream fos = new FileOutputStream(savePath, true);
+
+        for (int i = 0; i < bytes.length; i++) {
+            fos.write(bytes[i]);
+        }
+
+        fos.close();
     }
 }
