@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="300.0" prefWidth="500.0" style="-fx-background-color: rgba(0,0,0,0);" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SplashScreenFormController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="300.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="297.0" layoutY="75.0" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="297.0" AnchorPane.rightAnchor="53.0" AnchorPane.topAnchor="75.0">
+         <image>
+            <Image url="@../image/loading.gif" />
+         </image>
+      </ImageView>
+      <Label layoutX="37.0" layoutY="41.0" prefHeight="51.0" prefWidth="247.0" text="Simple Java FX Text Editor" textFill="WHITE" AnchorPane.leftAnchor="37.0" AnchorPane.topAnchor="50.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblStatus" alignment="TOP_LEFT" layoutX="37.0" layoutY="102.0" prefHeight="16.0" prefWidth="170.0" text="Loading..." textFill="WHITE" />
+      <Label layoutX="37.0" layoutY="217.0" text="Copyright  © 2022 DEP9. All Rights Reserved." textFill="WHITE" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="37.0" AnchorPane.rightAnchor="252.0" AnchorPane.topAnchor="217.0">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
