@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.web.HTMLEditor;
 import javafx.stage.Modality;
@@ -61,7 +62,15 @@ public class TextEditorFormController {
         });
     }
 
-    public void mnuNewOnAction(ActionEvent actionEvent) {
+    public void mnuNewOnAction(ActionEvent actionEvent) throws IOException {
+        URL resource = this.getClass().getResource("/view/TextEditorForm.fxml");
+        Parent container = FXMLLoader.load(resource);
+        Scene editorScene = new Scene(container);
+        Stage primaryStage = new Stage();
+        primaryStage.setScene(editorScene);
+        primaryStage.setTitle("Simple Java FX Text Editor");
+        primaryStage.show();
+        primaryStage.centerOnScreen();
     }
 
     public void mnuOpenOnAction(ActionEvent actionEvent) {

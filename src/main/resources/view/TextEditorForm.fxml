@@ -36,7 +36,7 @@
                      </accelerator>
                   </MenuItem>
                   <SeparatorMenuItem mnemonicParsing="false" />
-              <MenuItem fx:id="mnuClose" mnemonicParsing="false" onAction="#mnuCloseOnAction" text="Close">
+              <MenuItem fx:id="mnuClose" mnemonicParsing="false" text="Close">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="W" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
