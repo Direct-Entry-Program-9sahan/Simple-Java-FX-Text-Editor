@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.web.HTMLEditor;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -18,7 +19,11 @@ import java.net.URL;
 import java.util.Arrays;
 
 public class TextEditorFormController {
+    private String readMsg;
+    private File destDir;
+
     private File srcFile;
+    private String txtByteBuffer;
     public HTMLEditor txtEditor;
     public MenuItem mnuNew;
     public MenuItem mnuOpen;
@@ -102,6 +107,13 @@ public class TextEditorFormController {
         }
     }
 
+    public void selectDirectory(){
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        directoryChooser.setTitle("Select a destination folder to save");
+        directoryChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        destDir = directoryChooser.showDialog(txtEditor.getScene().getWindow());
+    }
+
     public void readFile(String path) throws IOException {
         File file = new File(path);
         FileInputStream fis = new FileInputStream(file);
@@ -113,27 +125,10 @@ public class TextEditorFormController {
         }
         System.out.println(Arrays.toString(byteBuffer));
         fis.close();
+        readMsg = Arrays.toString(byteBuffer);
     }
 
     public void writeFile(String path) throws IOException {
-        File file = new File(path);
-        if (!file.exists()) {
-            file.createNewFile();
-        }
-
-        String something = "Hello Test...!\n";
-        byte[] bytes = something.getBytes();
-
-        FileOutputStream fos = new FileOutputStream(file, true);
-
-        for (int i = 0; i < bytes.length; i++) {
-            fos.write(bytes[i]);
-        }
-
-        fos.close();
-    }
-
-    public void writeOnEditor(String path) throws IOException {
         File file = new File(path);
         if (!file.exists()) {
             file.createNewFile();
@@ -149,5 +144,13 @@ public class TextEditorFormController {
         }
 
         fos.close();
+    }
+
+    public void writeToFile(String filePath) throws IOException {
+        writeFile(filePath);
+    }
+
+    public void writeToEditor(String path){
+
     }
 }
