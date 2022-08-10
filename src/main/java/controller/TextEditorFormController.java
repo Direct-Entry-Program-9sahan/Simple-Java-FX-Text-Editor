@@ -13,10 +13,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.util.Arrays;
 
@@ -116,5 +113,41 @@ public class TextEditorFormController {
         }
         System.out.println(Arrays.toString(byteBuffer));
         fis.close();
+    }
+
+    public void writeFile(String path) throws IOException {
+        File file = new File(path);
+        if (!file.exists()) {
+            file.createNewFile();
+        }
+
+        String something = "Hello Test...!\n";
+        byte[] bytes = something.getBytes();
+
+        FileOutputStream fos = new FileOutputStream(file, true);
+
+        for (int i = 0; i < bytes.length; i++) {
+            fos.write(bytes[i]);
+        }
+
+        fos.close();
+    }
+
+    public void writeOnEditor(String path) throws IOException {
+        File file = new File(path);
+        if (!file.exists()) {
+            file.createNewFile();
+        }
+
+        String something = txtEditor.getHtmlText();
+        byte[] bytes = something.getBytes();
+
+        FileOutputStream fos = new FileOutputStream(file, true);
+
+        for (int i = 0; i < bytes.length; i++) {
+            fos.write(bytes[i]);
+        }
+
+        fos.close();
     }
 }
