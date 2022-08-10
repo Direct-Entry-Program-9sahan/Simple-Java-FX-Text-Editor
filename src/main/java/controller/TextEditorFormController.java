@@ -19,6 +19,7 @@ import java.net.URL;
 import java.util.Arrays;
 
 public class TextEditorFormController {
+    File file1;
     private File savePath;
     private String readMsg;
     private File destDir;
@@ -86,13 +87,13 @@ public class TextEditorFormController {
     public void mnuOpenOnAction(ActionEvent actionEvent) throws IOException {
         selectFile();//value assigned to File srcFiles
         readFile(srcFile.toString());//value assign to String readMsg
-        writeToEditor(savePath.toString());
+        writeToEditor();
     }
 
     public void mnuSaveOnAction(ActionEvent actionEvent) throws IOException {
         selectDirectory();//assign path of the saving directory to File destDir
-        File file = new File(destDir.toString() + "/a.txt");
-        writeToFile(file.toString());
+        file1 = new File(destDir.toString() + "/a.txt");
+        writeToFile(file1.toString());
     }
 
     public void mnuPrintOnAction(ActionEvent actionEvent) {
@@ -103,6 +104,7 @@ public class TextEditorFormController {
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
         fileChooser.setTitle("Select a file");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("All Files (*.*)", "*.*"));
+
 
         srcFile = fileChooser.showOpenDialog(txtEditor.getScene().getWindow());
         if (srcFile != null) {
@@ -140,6 +142,7 @@ public class TextEditorFormController {
         }
 
         String something = txtEditor.getHtmlText();
+        something = something.replaceAll("\\<.*?\\>", "");
         byte[] bytes = something.getBytes();
 
         FileOutputStream fos = new FileOutputStream(file, true);
@@ -155,11 +158,11 @@ public class TextEditorFormController {
         writeFile(filePath);
     }
 
-    public void writeToEditor(String readedTxt) throws IOException { //when open file
-        String something = readedTxt;
+    public void writeToEditor() throws IOException { //when open file
+        String something = readMsg;
         byte[] bytes = something.getBytes();
 
-        FileOutputStream fos = new FileOutputStream(savePath, true);
+        FileOutputStream fos = new FileOutputStream(file1);
 
         for (int i = 0; i < bytes.length; i++) {
             fos.write(bytes[i]);
